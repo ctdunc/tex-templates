@@ -1,0 +1,128 @@
+%\itseries} NREL 16x9 Poster Theme
+% Author: Connor Duncan
+% License: Whatever NREL Decides is appropriate (as open as possible please).
+
+
+\ProvidesPackage{beamerthemenrel}
+
+\RequirePackage[scaled]{helvet}
+\renewcommand\familydefault{\sfdefault}
+\usepackage[T1]{fontenc}
+\RequirePackage{calc}
+\RequirePackage{graphicx}
+
+\newlength{\logowidth}
+\setlength{\logowidth}{0cm}
+
+%insert logo to left
+\newcommand{\logoleft}[1]{
+    \newcommand{\insertlogo}{#1}
+    \settowidth{\logowidth}{\insertlogo}
+    \addtolength{\logowidth}{10ex}
+}
+% ========= 
+% Define Beamer Fonts
+% ========= 
+\setbeamerfont{headline title}{size=\fontsize{64}{36},series=\bfseries}
+\setbeamerfont{headline author}{size=\fontsize{34}{12}}
+
+\setbeamerfont{block title}{size=\fontsize{41}{15}, series=\bfseries}
+\setbeamerfont{block body}{size=\fontsize{23}{9},series=\bfseries,shape=\itshape}
+
+\setbeamerfont{footline disclaimer}{size=\fontsize{13.5}{9},series=\bfseries,shape=\itshape}
+\setbeamerfont{footline conference}{size=\fontsize{13.5}{9},shape=\itshape}
+
+% ========= 
+% Headline 
+% ========= 
+\setbeamertemplate{headline}
+{
+    \begin{beamercolorbox}{headline}
+        \begin{columns}
+            \begin{column}{\logowidth}
+                \vskip5ex
+                \ifdefined\insertlogo
+                \vspace*{\fill}
+                \hspace{10ex}
+                \raggedright
+                \insertlogo
+                \vspace*{\fill}
+                \else\fi
+            \end{column}
+            \begin{column}{\dimexpr\paperwidth-\logowidth-\logowidth}
+                \usebeamerfont{headline}
+                \vskip3ex
+                \centering
+                {\usebeamerfont{headline title}\inserttitle\\[0.5ex]}
+                {\usebeamerfont{headline author}\usebeamercolor[fg]{headline author}\insertauthor\\[0.5ex]}
+            \end{column}
+            \begin{column}{\logowidth}
+            \end{column}
+        \end{columns}
+    \end{beamercolorbox}
+}
+
+% =========
+% Block
+% =========
+\setbeamertemplate{block begin}
+{
+    \usebeamerfont{block body}
+    \begin{beamercolorbox}[colsep*=0ex]{block body}
+        \setlength{\parskip}{1ex}
+}
+
+\setbeamertemplate{block end}{
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[colsep=0ex,dp=2ex,center]{block title}
+        \vskip0pt
+        \usebeamerfont{block title}\insertblocktitle
+    \end{beamercolorbox}
+}
+
+% ========= 
+% Footer
+% =========
+% LEFT FOOTER
+\newcommand{\fundingoffices}[1]{\newcommand{\insfundoff}{#1}}
+
+% RIGHT FOOTER
+
+\newcommand{\conftitle}[1]{\newcommand{\insconftitle}{#1}}
+\newcommand{\conflocation}[1]{\newcommand{\insconfloc}{#1}}
+\newcommand{\confdates}[1]{\newcommand{\insconfdates}{#1}}
+\newcommand{\pubtracker}[1]{\newcommand{\inspubtracker}{#1}}
+
+\setbeamertemplate{footline}{
+    \begin{beamercolorbox}{headline}
+    \begin{columns}
+        \begin{column}{0.03\paperwidth}
+        \end{column}
+        \begin{column}{0.7\paperwidth}
+            \raggedright
+            {\usebeamerfont{footline disclaimer}
+            This work was authored by the National Renewable Energy Laboratory, 
+            operated by Alliance for Sustainable Energy, LLC, for the U.S. Department
+            of Energy (DOE) under Contract No. DE-AC36-08GO28308. 
+            Funding provided by \insfundoff.
+            The views expressed in the article do not necessarily represent the views of the DOE or the U.S. Government. 
+            The U.S. Government retains and the publisher, by accepting the article for publication, 
+            acknowledges that the U.S. Government retains a nonexclusive, paid-up, 
+            irrevocable, worldwide license to publish or reproduce the published form of this work, 
+            or allow others to do so, for U.S. Government purposes.
+            \\[0.5ex]}
+        \end{column}
+        \begin{column}{0.24\paperwidth}
+            \raggedleft
+            \usebeamerfont{footline conference}{
+            \insconftitle\\
+            \insconfloc\\
+            \insconfdates\\
+            \inspubtracker
+        }
+        \end{column}
+        \begin{column}{0.03\paperwidth}
+        \end{column}
+    \end{columns}
+    \end{beamercolorbox}
+} 
