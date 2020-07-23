@@ -24,15 +24,16 @@
     \newcommand{\insertlogoleft}{#1}
     \settowidth{\llogowidth}{\insertlogoleft}
     \addtolength{\llogowidth}{10ex}
+    \setlength{\lwidth}{\maxof{\llogowidth}{\rlogowidth}}
 }
 %insert logo to right
 \newcommand{\logoright}[1]{
     \newcommand{\insertlogoright}{#1}
     \settowidth{\rlogowidth}{\insertlogoright}
     \addtolength{\rlogowidth}{10ex}
+    \setlength{\lwidth}{\maxof{\llogowidth}{\rlogowidth}}
 }
 
-\setlength{\lwidth}{\maxof{\llogowidth}{\rlogowidth}}
 
 % calculate column widths
 \newlength{\colwidth}
@@ -79,7 +80,7 @@
             \begin{column}{\lwidth}
                 \vskip1ex
                 \ifdefined\insertlogoright
-                \raggedleft
+                \raggedright
                 \insertlogoright
                 \vspace*{\fill}
                 \else\fi
