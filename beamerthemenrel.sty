@@ -11,15 +11,28 @@
 \RequirePackage{calc}
 \RequirePackage{graphicx}
 
-\newlength{\logowidth}
-\setlength{\logowidth}{0cm}
+\newlength{\llogowidth}
+\setlength{\llogowidth}{0cm}
 
+\newlength{\rlogowidth}
+\setlength{\rlogowidth}{0cm}
+
+\newlength{\lwidth}
+\setlength{\lwidth}{0cm}
 %insert logo to left
 \newcommand{\logoleft}[1]{
     \newcommand{\insertlogoleft}{#1}
-    \settowidth{\logowidth}{\insertlogoleft}
-    \addtolength{\logowidth}{10ex}
+    \settowidth{\llogowidth}{\insertlogoleft}
+    \addtolength{\llogowidth}{10ex}
 }
+%insert logo to right
+\newcommand{\logoright}[1]{
+    \newcommand{\insertlogoright}{#1}
+    \settowidth{\rlogowidth}{\insertlogoright}
+    \addtolength{\rlogowidth}{10ex}
+}
+
+\setlength{\lwidth}{\maxof{\llogowidth}{\rlogowidth}}
 
 % calculate column widths
 \newlength{\colwidth}
@@ -49,7 +62,7 @@
 {
     \begin{beamercolorbox}{headline}
         \begin{columns}
-            \begin{column}{\logowidth}
+            \begin{column}{\lwidth}
                 \vskip1ex
                 \ifdefined\insertlogoleft
                 \raggedright
@@ -57,13 +70,19 @@
                 \vspace*{\fill}
                 \else\fi
             \end{column}
-            \begin{column}{\dimexpr\paperwidth-\logowidth-\logowidth}
+            \begin{column}{\dimexpr\paperwidth-\lwidth-\lwidth}
                 \vskip3ex
                 \centering
                 {\usebeamerfont{headline title}\inserttitle\\[0.5ex]}
                 {\usebeamerfont{headline author}\usebeamercolor[fg]{headline author}\insertauthor\\[0.5ex]}
             \end{column}
-            \begin{column}{\logowidth}
+            \begin{column}{\lwidth}
+                \vskip1ex
+                \ifdefined\insertlogoright
+                \raggedleft
+                \insertlogoright
+                \vspace*{\fill}
+                \else\fi
             \end{column}
         \end{columns}
     \end{beamercolorbox}
